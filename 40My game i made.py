@@ -25,6 +25,8 @@ paddle_col = (142,135,123)
 paddle_outline = (100,100,100)
 #text color
 text_col = (78,81,139)
+#score color
+score_col = (231,51,62)
 
 
 #define game varibls
@@ -158,9 +160,11 @@ class game_ball():
                         self.speed_x *= -1
                     #reduce the blocks
                     if wall.blocks[row_count][item_count][1] > 1:
-                        wall.blocks[row_count][item_count][1] -= 1
+                        wall.blocks[row_count][item_count][1] -= 1  
                     else:
                         wall.blocks[row_count][item_count][0] = (0,0,0,0)
+                    self.score += 1
+                    pygame.display.set_caption('BreakOut %d/72'%(self.score))
                 
                 #check if block srill sieixtesed
                 if wall.blocks[row_count][item_count][0] != (0,0,0,0):
@@ -221,6 +225,8 @@ class game_ball():
         self.speed_y = -4
         self.speed_max = 5
         self.game_over = 0
+        self.score = 0
+        pygame.display.set_caption('BreakOut')
 
 
 
@@ -262,10 +268,10 @@ while run:
         if game_over == 0:
             draw_text("CLICK ANYWHERE TO START", font,text_col,100,screen_height // 2 + 100)
         elif game_over == 1:
-            draw_text("YOU WON!", font,text_col,240,screen_height // 2 + 50)
+            draw_text("YOU WON! YOUR SCORE WAS: %d/72"%(ball.score), font,text_col,40,screen_height // 2 + 50)
             draw_text("CLICK ANYWHERE TO START", font,text_col,100,screen_height // 2 + 100)
         elif game_over == -1:
-            draw_text("YOU LOST", font,text_col,240,screen_height // 2 + 50)
+            draw_text("YOU LOST. YOUR SCORE WAS: %d/72"%(ball.score), font,text_col,40,screen_height // 2 + 50)
             draw_text("CLICK ANYWHERE TO START", font,text_col,100,screen_height // 2 + 100)
 
     for event in pygame.event.get():
