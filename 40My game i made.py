@@ -233,7 +233,7 @@ player_paddle = paddle()
 
 
 #create ball
-ball = game_ball(player_paddle.x == (player_paddle.width // 2),player_paddle.y - player_paddle.height)
+ball = game_ball(player_paddle.x + (player_paddle.width // 2),player_paddle.y - player_paddle.height)
 
 
 run = True
@@ -273,7 +273,7 @@ while run:
             run = False
         if event.type == pygame.MOUSEBUTTONDOWN and live_ball == False:
             live_ball = True
-            ball.reset(player_paddle.x == (player_paddle.width // 2),player_paddle.y - player_paddle.height)
+            ball.reset(player_paddle.x + (player_paddle.width // 2),player_paddle.y - player_paddle.height)
             player_paddle.reset()
             wall.create_wall()
 
